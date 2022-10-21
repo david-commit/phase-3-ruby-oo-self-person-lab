@@ -2,7 +2,7 @@ require "pry"
 
 class Person
  attr_reader :name
- attr_accessor :bank_account, :happiness
+ attr_accessor :bank_account
 
  def initialize(name, bank_account=25, happiness=8, hygiene=8)
   @name = name
@@ -16,7 +16,27 @@ class Person
  end
 
  def hygiene=(level)
-  @hygiene = level
+  @hygiene = if level > 10
+   10
+   elsif level < 0
+    0
+    else
+     level
+    end
+ end
+
+def happiness
+ @happiness
+end
+
+ def happiness=(value)
+  @happiness = if value > 10
+   10
+  elsif value < 0
+    0
+   else
+    value
+   end
  end
 
  def happy?
@@ -51,17 +71,31 @@ class Person
   '♪ another one bites the dust ♫'
  end
 
- def call_friend(instance)
+ def call_friend(friend)
   self.happiness += 3
+  friend.happiness += 3
+  return "Hi #{friend.name}! It's #{self.name}. How are you?"
  end
 
+ 
  def start_conversation(convo_starter, topic)
   if topic == "politics"
+   self.happiness -= 2
+   convo_starter.happiness -= 2
    'blah blah partisan blah lobbyist'
   elsif topic == "weather"
+   self.happiness += 1
+   convo_starter.happiness += 1
    'blah blah sun blah rain'
   else
    'blah blah blah blah blah'
   end
  end
 end
+
+# felix = Person.new("FLeix")
+
+# maria = Person.new("maria")
+# felix.call_friend(felix)
+# binding.pry
+
