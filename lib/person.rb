@@ -92,10 +92,3 @@ end
   end
  end
 end
-
-# felix = Person.new("FLeix")
-
-# maria = Person.new("maria")
-# felix.call_friend(felix)
-# binding.pry
-
